@@ -129,19 +129,12 @@ int Game::Run()
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_screenTexture, 0);
 	glBindTexture(GL_TEXTURE_2D, 0);
 
-	glGenTextures(1, &m_depthTexture);
-	glBindTexture(GL_TEXTURE_2D, m_depthTexture);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT32, WIDTH, HEIGHT, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, m_screenTexture, 0);
-	glBindTexture(GL_TEXTURE_2D, 0);
-
 	/* Render Buffer Object */
 	glGenRenderbuffers(1, &m_RBO);
 	glBindRenderbuffer(GL_RENDERBUFFER, m_RBO);
-	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, WIDTH, HEIGHT);
-	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, m_RBO);
+	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, WIDTH, HEIGHT);
+	glBindRenderbuffer(GL_RENDERBUFFER, 0);
+	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, m_RBO);
 	glBindRenderbuffer(GL_RENDERBUFFER, 0);
 
 	if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
@@ -157,25 +150,25 @@ int Game::Run()
 	{
 		glfwPollEvents();
 
-//		glBindFramebuffer(GL_FRAMEBUFFER, m_FBO);
+		glBindFramebuffer(GL_FRAMEBUFFER, m_FBO);
 		glClearColor(0.0f, 0.4f, 0.6f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glEnable(GL_DEPTH_TEST);
 
 		Update(0);
 
-//		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-//		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-//		glClear(GL_COLOR_BUFFER_BIT);
-//		glDisable(GL_DEPTH_TEST);
+		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
+		glDisable(GL_DEPTH_TEST);
 
-//		glBindVertexArray(m_screenVAO);
-//			glActiveTexture(GL_TEXTURE0);
-//			glBindTexture(GL_TEXTURE_2D, m_screenTexture);
-//			m_screenShader->Use();
-//			glDrawArrays(GL_TRIANGLES, 0, 6);
-//		glBindVertexArray(0);
+		glBindVertexArray(m_screenVAO);
+			glActiveTexture(GL_TEXTURE0);
+			glBindTexture(GL_TEXTURE_2D, m_screenTexture);
+			m_screenShader->Use();
+			glDrawArrays(GL_TRIANGLES, 0, 6);
+		glBindVertexArray(0);
 
 		glfwSwapBuffers(m_window);
 

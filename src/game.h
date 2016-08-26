@@ -48,7 +48,6 @@ private:
 
 	GLuint m_FBO;
 	GLuint m_screenTexture;
-	GLuint m_depthTexture;
 	GLuint m_RBO;
 	GLuint m_screenVAO;
 	GLuint m_screenVBO;
