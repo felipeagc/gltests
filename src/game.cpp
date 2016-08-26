@@ -157,25 +157,25 @@ int Game::Run()
 	{
 		glfwPollEvents();
 
-		glBindFramebuffer(GL_FRAMEBUFFER, m_FBO);
+//		glBindFramebuffer(GL_FRAMEBUFFER, m_FBO);
 		glClearColor(0.0f, 0.4f, 0.6f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glEnable(GL_DEPTH_TEST);
 
 		Update(0);
 
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+//		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
-		glDisable(GL_DEPTH_TEST);
+//		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+//		glClear(GL_COLOR_BUFFER_BIT);
+//		glDisable(GL_DEPTH_TEST);
 
-		glBindVertexArray(m_screenVAO);
-			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_2D, m_screenTexture);
-			m_screenShader->Use();
-			glDrawArrays(GL_TRIANGLES, 0, 6);
-		glBindVertexArray(0);
+//		glBindVertexArray(m_screenVAO);
+//			glActiveTexture(GL_TEXTURE0);
+//			glBindTexture(GL_TEXTURE_2D, m_screenTexture);
+//			m_screenShader->Use();
+//			glDrawArrays(GL_TRIANGLES, 0, 6);
+//		glBindVertexArray(0);
 
 		glfwSwapBuffers(m_window);
 
