@@ -17,7 +17,7 @@ Mesh::~Mesh()
 
 	for (auto texture : m_textures)
 	{
-		Game::Instance().GetResources().Remove(texture->GetPath());
+		Engine::Instance().GetResources().Remove(texture->GetPath());
 	}
 }
 
@@ -50,9 +50,10 @@ void Mesh::SetupMesh()
 	glBindVertexArray(0);
 }
 
-void Mesh::Draw(Shader &shader)
+void Mesh::Draw(Shader &shader, const glm::mat4 transform)
 {
 	shader.Use();
+	shader.Update(transform);
 
 	for (GLuint i = 0; i < m_textures.size(); i++)
 	{

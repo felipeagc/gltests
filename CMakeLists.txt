@@ -5,7 +5,7 @@ project(gltests)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${gltests_SOURCE_DIR}/cmake")
 
 # Set game sources here
-file(GLOB SOURCES src/*.cpp)
+file(GLOB SOURCES motor/*.cpp mygame/*.cpp)
 
 add_executable(gltests ${SOURCES})
 

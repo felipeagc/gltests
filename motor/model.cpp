@@ -14,11 +14,11 @@ Model::~Model()
 	}
 }
 
-void Model::Draw(Shader &shader)
+void Model::Draw(Shader &shader, const glm::mat4 transform)
 {
 	for (Mesh *mesh : m_meshes)
 	{
-		mesh->Draw(shader);
+		mesh->Draw(shader, transform);
 	}
 }
 
@@ -101,7 +101,7 @@ std::vector<Texture*> Model::LoadMaterialTextures(aiMaterial *material, aiTextur
 		aiString str;
 		material->GetTexture(type, i, &str);
 
-			Texture *texture = Game::Instance().GetResources().Get<Texture>(m_directory + "/" + str.C_Str());
+			Texture *texture = Engine::Instance().GetResources().Get<Texture>(m_directory + "/" + str.C_Str());
 			textures.push_back(texture);
 	}
 

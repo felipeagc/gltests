@@ -24,6 +24,8 @@ void Camera::Update()
 	m_right = glm::normalize(glm::cross(m_forward, glm::vec3(0, 1, 0)));
 
 	m_up = glm::normalize(glm::cross(m_right, m_forward));
+
+	UpdateAspect(Engine::Instance().GetWidth(), Engine::Instance().GetHeight());
 }
 
 void Camera::UpdateAspect(int width, int height)

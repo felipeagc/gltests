@@ -13,7 +13,7 @@
 
 #include "mesh.h"
 #include "resource.h"
-#include "game.h"
+#include "engine.h"
 
 class Mesh;
 
@@ -21,7 +21,7 @@ class Model : public Resource
 {
 public:
 	Model(const std::string &fileName);
-	void Draw(Shader &shader);
+	void Draw(Shader &shader, const glm::mat4 transform);
 
 	~Model();
 

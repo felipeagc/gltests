@@ -10,7 +10,7 @@
 #include "texture.h"
 #include "vertex.h"
 #include "resource.h"
-#include "game.h"
+#include "engine.h"
 
 class Mesh
 {
@@ -18,7 +18,7 @@ public:
 	Mesh(std::vector<Vertex> vertices, std::vector<GLuint> indices, std::vector<Texture*> textures);
 	~Mesh();
 
-	void Draw(Shader &shader);
+	void Draw(Shader &shader, const glm::mat4 transform);
 private:
 	void SetupMesh();
 
